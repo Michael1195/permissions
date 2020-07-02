@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="permissionApp">
+  <head>
+    <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="styles.css">
+    <title>Permission</title>
+  </head>
+  <body ng-controller="permissionController">
+    <div class="wrapper">
+      <h1 class="title">Permission</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <div class="permissions">
+                Sections
+              </div>
+            </th>
+            <td>
+              <div class="permissions">
+                <input
+                  type="checkbox"
+                  class="custom-checkbox"
+                  id="allView"
+                  ng-checked="checkAllView()"
+                  ng-click="checkedColumn($event)"
+                />
+                <label for="allView">Check all</label>
+              </div>
+            </td>
+            <td>
+              <div class="permissions">
+                <input
+                  type="checkbox"
+                  class="custom-checkbox"
+                  id="allEdit"
+                  ng-disabled="!checkSomeView()"
+                  ng-checked="checkAllEdit()"
+                  ng-click="checkedColumn($event)"
+                />
+                <label for="allEdit">Check all</label>
+              </div>
+            </td>
+            <td>
+              <div class="permissions">
+                <input
+                  type="checkbox"
+                  class="custom-checkbox"
+                  id="allRemove"
+                  ng-disabled="!checkSomeEdit()"
+                  ng-checked="checkAllRemove()"
+                  ng-click="checkedColumn($event)"
+                />
+                <label for="allRemove">Check all</label>
+              </div>
+            </td>
+          </tr>
+        </thead>
+        <tbody class="tbody">
+          <tr ng-repeat="item in list.items">
+            <td>
+              <div class="permissions">
+                {{item.section}}
+              </div>
+            </td>
+            <td>
+              <div class="permissions">
+                <input
+                  type="checkbox"
+                  class="custom-checkbox"
+                  id="{{item.section + 'View'}}"
+                  ng-model="item.permission.view"
+                />
+                <label for="{{item.section + 'View'}}">View</label>
+              </div>
+            </td>
+            <td>
+              <div class="permissions">
+                <input
+                  type="checkbox"
+                  class="custom-checkbox"
+                  id="{{item.section + 'Edit'}}"
+                  ng-disabled="!item.permission.view"
+                  ng-model="item.permission.edit"
+                />
+                <label for="{{item.section + 'Edit'}}">Edit</label>
+              </div>
+            </td>
+            <td>
+              <div class="permissions">
+                <input
+                  type="checkbox"
+                  class="custom-checkbox"
+                  id="{{item.section + 'Remove'}}"
+                  ng-disabled="!item.permission.edit"
+                  ng-model="item.permission.remove"
+                />
+                <label for="{{item.section + 'Remove'}}">Remove</label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn" type="button" ng-click="addLocalStorage()">
+        Save
+      </button>
+    </div>
+
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
