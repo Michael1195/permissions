@@ -1,6 +1,6 @@
 "use strict"
 
-var model = {
+let model = {
   items: [
     {
       section: "Calendar",
@@ -21,18 +21,20 @@ var model = {
   ],
 };
 
-var permissionApp = angular.module("permissionApp", []);
+let permissionApp = angular.module("permissionApp", []);
 permissionApp.controller("permissionController", function ($scope) {
   $scope.list = model;
 
-  $scope.getLocalStorage = (function () {
+  function getLocalStorage() {
     try {
       const serializedState = localStorage.getItem("permission");
       if(serializedState) $scope.list.items = JSON.parse(serializedState);
     } catch (err) {
       console.error("Get state error: ", err);
     }
-  })();
+  };
+
+  getLocalStorage();
 
   $scope.addLocalStorage = function () {
     try {
