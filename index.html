@@ -37,7 +37,7 @@
                   type="checkbox"
                   class="custom-checkbox"
                   id="allEdit"
-                  ng-disabled="!checkSomeView()"
+                  ng-disabled="!checkAllView()"
                   ng-checked="checkAllEdit()"
                   ng-click="checkedColumn($event)"
                 />
@@ -50,7 +50,7 @@
                   type="checkbox"
                   class="custom-checkbox"
                   id="allRemove"
-                  ng-disabled="!checkSomeEdit()"
+                  ng-disabled="!checkAllEdit()"
                   ng-checked="checkAllRemove()"
                   ng-click="checkedColumn($event)"
                 />
@@ -73,6 +73,7 @@
                   class="custom-checkbox"
                   id="{{item.section + 'View'}}"
                   ng-model="item.permission.view"
+                  ng-click="handleView($event)"
                 />
                 <label for="{{item.section + 'View'}}">View</label>
               </div>
@@ -85,6 +86,7 @@
                   id="{{item.section + 'Edit'}}"
                   ng-disabled="!item.permission.view"
                   ng-model="item.permission.edit"
+                  ng-click="handleEdit($event)"
                 />
                 <label for="{{item.section + 'Edit'}}">Edit</label>
               </div>
